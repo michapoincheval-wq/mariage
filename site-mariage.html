@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camille &amp; Antoine — 12 juin 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FBF7F1;
+    --ivory-deep:#F3ECE1;
+    --green:#3E4B36;
+    --green-deep:#2A3324;
+    --rose:#C08791;
+    --rose-soft:#E7CDD1;
+    --gold:#AD8A50;
+    --ink:#2C2A24;
+    --line:#D9CFBE;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.script{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    margin:0;
+    color:var(--green-deep);
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+  section{padding:110px 0;}
+  .rule{
+    width:56px;height:1px;background:var(--gold);
+    margin:28px auto;
+  }
+  .rule.left{margin:28px 0;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(251,247,241,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:16px;padding-bottom:16px;
+  }
+  .nav-name{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:0.5px;color:var(--green-deep);}
+  .nav-links{display:flex;gap:26px;list-style:none;margin:0;padding:0;}
+  .nav-links a{
+    font-size:14px;text-decoration:none;color:var(--ink);
+    padding-bottom:3px;border-bottom:1px solid transparent;
+    transition:border-color .25s ease, color .25s ease;
+  }
+  .nav-links a:hover{border-color:var(--rose);color:var(--green-deep);}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--green-deep);}
+
+  @media (max-width:720px){
+    .nav-links{
+      position:fixed;top:60px;left:0;right:0;
+      flex-direction:column;background:var(--ivory);
+      padding:20px 28px;gap:16px;
+      border-bottom:1px solid var(--line);
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;position:relative;
+    padding:140px 24px 80px;
+    overflow:hidden;
+  }
+  .hero-branch{
+    position:absolute;opacity:0.55;
+  }
+  .hero-branch.tl{top:20px;left:-30px;width:220px;transform:rotate(-8deg);}
+  .hero-branch.br{bottom:20px;right:-30px;width:240px;transform:rotate(178deg);}
+  .hero-eyebrow{
+    font-size:14px;letter-spacing:2px;color:var(--rose);
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
+  }
+  .hero h1{
+    font-size:clamp(48px,9vw,92px);
+    line-height:1.05;
+    margin:18px 0;
+    letter-spacing:0.5px;
+  }
+  .hero .amp{
+    display:block;font-style:italic;color:var(--rose);font-size:0.55em;margin:6px 0;
+  }
+  .hero-date{
+    font-size:19px;letter-spacing:1px;color:var(--green);
+    margin-top:6px;
+  }
+  .hero-venue{
+    font-size:15px;color:#6b6656;margin-top:4px;
+  }
+  .hero-scroll{
+    margin-top:56px;font-size:13px;color:#8a8570;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{text-align:center;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(30px,4vw,42px);}
+  .section-head p{color:#6b6656;font-size:16px;max-width:520px;margin:14px auto 0;}
+
+  /* ---------- PROGRAMME (timeline, legitimate sequence) ---------- */
+  .timeline{
+    position:relative;
+    max-width:560px;margin:0 auto;
+    padding-left:2px;
+  }
+  .timeline::before{
+    content:"";position:absolute;left:74px;top:6px;bottom:6px;
+    width:1px;background:var(--line);
+  }
+  .t-item{
+    display:flex;gap:28px;padding:22px 0;
+  }
+  .t-time{
+    width:74px;flex-shrink:0;text-align:right;
+    font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--gold);
+    position:relative;
+  }
+  .t-time::after{
+    content:"";position:absolute;right:-5px;top:6px;
+    width:9px;height:9px;border-radius:50%;
+    background:var(--ivory);border:1.5px solid var(--rose);
+  }
+  .t-body{padding-left:24px;}
+  .t-body h3{font-size:21px;margin-bottom:4px;}
+  .t-body p{font-size:14.5px;color:#6b6656;margin:0;}
+
+  /* ---------- ITINERAIRE / HOTELS ---------- */
+  .info-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  }
+  @media (max-width:680px){.info-grid{grid-template-columns:1fr;}}
+  .info-block h3{
+    font-size:24px;margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .info-block p{font-size:15px;color:#5a5647;margin:0 0 10px;}
+  .place-card{
+    border-top:1px solid var(--line);
+    padding:18px 0;
+  }
+  .place-card:last-child{border-bottom:1px solid var(--line);}
+  .place-card .name{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--green-deep);}
+  .place-card .meta{font-size:13.5px;color:#8a8570;margin-top:3px;}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  @media (max-width:680px){.gallery{grid-template-columns:repeat(2,1fr);}}
+  .g-item{
+    aspect-ratio:1;
+    background:linear-gradient(155deg,var(--ivory-deep),var(--rose-soft));
+    display:flex;align-items:center;justify-content:center;
+    color:#a3927a;font-size:13px;font-family:'Cormorant Garamond',serif;font-style:italic;
+    border:1px solid var(--line);
+  }
+  .g-item:nth-child(3n+2){background:linear-gradient(155deg,#EFE9DC,var(--ivory-deep));}
+  .g-item:nth-child(4n){aspect-ratio:1/1.3;}
+
+  /* ---------- INFOS PRATIQUES / CADEAUX ---------- */
+  .practical{
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  }
+  @media (max-width:680px){.practical{grid-template-columns:1fr;}}
+  .practical-card{
+    background:var(--ivory-deep);
+    padding:32px 28px;
+    border-left:2px solid var(--rose);
+  }
+  .practical-card h3{font-size:22px;margin-bottom:10px;}
+  .practical-card p{font-size:14.5px;color:#5a5647;margin:0;}
+
+  /* ---------- RSVP ---------- */
+  .rsvp-form{
+    max-width:560px;margin:0 auto;
+    display:grid;gap:20px;
+  }
+  .field{display:grid;gap:7px;}
+  .field label{font-size:13px;color:var(--green);letter-spacing:0.3px;}
+  .field input, .field select, .field textarea{
+    font-family:'Jost',sans-serif;font-size:15px;font-weight:300;
+    background:transparent;
+    border:none;border-bottom:1px solid var(--line);
+    padding:10px 2px;color:var(--ink);
+    outline:none;
+    transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color:var(--rose);
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:520px){.field-row{grid-template-columns:1fr;}}
+  textarea{resize:vertical;min-height:70px;font-family:'Jost',sans-serif;}
+  .rsvp-submit{
+    justify-self:start;
+    margin-top:10px;
+    background:var(--green-deep);
+    color:var(--ivory);
+    border:none;
+    padding:14px 34px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:17px;letter-spacing:0.5px;
+    cursor:pointer;
+    transition:background .25s ease, transform .15s ease;
+  }
+  .rsvp-submit:hover{background:var(--green);}
+  .rsvp-submit:active{transform:scale(0.98);}
+  .rsvp-submit:focus-visible, .field input:focus-visible, .field select:focus-visible{
+    outline:2px solid var(--gold);outline-offset:2px;
+  }
+  .rsvp-note{font-size:13px;color:#8a8570;margin-top:-4px;}
+  .rsvp-confirm{
+    display:none;
+    text-align:center;padding:40px 20px;
+  }
+  .rsvp-confirm h3{font-size:28px;margin-bottom:10px;}
+  .rsvp-confirm p{color:#6b6656;font-size:15px;}
+
+  footer{
+    text-align:center;padding:70px 24px 50px;
+    color:#8a8570;font-size:13.5px;
+  }
+  footer .script{color:var(--rose);font-size:22px;margin-bottom:10px;display:block;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">C &amp; A</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#itineraire">Itinéraire</a></li>
+      <li><a href="#logement">Logement</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#infos">Infos</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ---------- HERO ---------- -->
+<header class="hero">
+  <svg class="hero-branch tl" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 C 40 40, 60 60, 90 80 C 120 100, 140 110, 170 115" stroke="#C08791" stroke-width="1.2"/>
+    <path d="M40 30 C 55 35, 62 45, 60 58" stroke="#3E4B36" stroke-width="1.2"/>
+    <path d="M70 60 C 85 62, 92 72, 88 85" stroke="#3E4B36" stroke-width="1.2"/>
+    <path d="M105 88 C 120 88, 128 98, 122 110" stroke="#3E4B36" stroke-width="1.2"/>
+    <circle cx="60" cy="58" r="4" fill="#E7CDD1"/>
+    <circle cx="88" cy="85" r="4" fill="#E7CDD1"/>
+    <circle cx="122" cy="110" r="4" fill="#E7CDD1"/>
+  </svg>
+  <svg class="hero-branch br" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 C 40 40, 60 60, 90 80 C 120 100, 140 110, 170 115" stroke="#C08791" stroke-width="1.2"/>
+    <path d="M40 30 C 55 35, 62 45, 60 58" stroke="#3E4B36" stroke-width="1.2"/>
+    <path d="M70 60 C 85 62, 92 72, 88 85" stroke="#3E4B36" stroke-width="1.2"/>
+    <path d="M105 88 C 120 88, 128 98, 122 110" stroke="#3E4B36" stroke-width="1.2"/>
+    <circle cx="60" cy="58" r="4" fill="#E7CDD1"/>
+    <circle cx="88" cy="85" r="4" fill="#E7CDD1"/>
+    <circle cx="122" cy="110" r="4" fill="#E7CDD1"/>
+  </svg>
+
+  <p class="hero-eyebrow">Nous nous marions</p>
+  <h1>Camille<span class="amp">&amp;</span>Antoine</h1>
+  <p class="hero-date">12 juin 2027</p>
+  <p class="hero-venue">Domaine de la Rosaie · Provence, France</p>
+  <p class="hero-scroll">↓ découvrir la journée</p>
+</header>
+
+<!-- ---------- PROGRAMME ---------- -->
+<section id="programme">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Le programme du jour</h2>
+      <p>Une journée pensée pour profiter de chaque instant, entourés de ceux qu'on aime.</p>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-time">15h00</div>
+        <div class="t-body">
+          <h3>Cérémonie</h3>
+          <p>Sous le grand chêne du domaine. Arrivée conseillée 20 minutes avant.</p>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">16h00</div>
+        <div class="t-body">
+          <h3>Vin d'honneur</h3>
+          <p>Cocktail et petits fours dans les jardins.</p>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">19h00</div>
+        <div class="t-body">
+          <h3>Dîner</h3>
+          <p>Sous la verrière, discours et menu de saison.</p>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">22h00</div>
+        <div class="t-body">
+          <h3>Soirée dansante</h3>
+          <p>Ouverture de bal, puis piste ouverte jusqu'au bout de la nuit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- ITINERAIRE & LOGEMENT ---------- -->
+<section id="itineraire" style="background:var(--ivory-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>S'y rendre &amp; se loger</h2>
+      <p>Toutes les informations pratiques pour organiser votre venue.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-block">
+        <h3>Itinéraire</h3>
+        <p>Domaine de la Rosaie, 12 Chemin des Lavandes, 84800 Provence.</p>
+        <p>À 45 min d'Avignon TGV, 1h20 de Marseille-Provence. Parking gratuit sur place.</p>
+        <p>Une navette partira de la place du village à 14h15 pour les invités sans voiture.</p>
+      </div>
+      <div class="info-block">
+        <h3>Où dormir</h3>
+        <div class="place-card">
+          <div class="name">Le Mas des Oliviers</div>
+          <div class="meta">10 min du domaine · quelques chambres réservées pour nos invités</div>
+        </div>
+        <div class="place-card">
+          <div class="name">Auberge du Vieux Puits</div>
+          <div class="meta">15 min du domaine · charme provençal, tarif de groupe</div>
+        </div>
+        <div class="place-card">
+          <div class="name">Camping Les Cigales</div>
+          <div class="meta">20 min du domaine · option économique</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- GALERIE ---------- -->
+<section id="galerie">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Quelques souvenirs</h2>
+      <p>Les photos du jour viendront s'ajouter ici après la cérémonie.</p>
+    </div>
+    <div class="gallery">
+      <div class="g-item">photo à venir</div>
+      <div class="g-item">photo à venir</div>
+      <div class="g-item">photo à venir</div>
+      <div class="g-item">photo à venir</div>
+      <div class="g-item">photo à venir</div>
+      <div class="g-item">photo à venir</div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- INFOS PRATIQUES / CADEAUX ---------- -->
+<section id="infos" style="background:var(--ivory-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Infos pratiques</h2>
+      <p>Tout ce qu'il faut savoir avant le grand jour.</p>
+    </div>
+    <div class="practical">
+      <div class="practical-card">
+        <h3>Tenue</h3>
+        <p>Élégant champêtre. Prévoyez des chaussures confortables : la cérémonie et le vin d'honneur se déroulent sur l'herbe.</p>
+      </div>
+      <div class="practical-card">
+        <h3>Enfants</h3>
+        <p>Vos enfants sont les bienvenus. Un espace de jeux encadré sera prévu pendant le dîner.</p>
+      </div>
+      <div class="practical-card">
+        <h3>Liste de mariage</h3>
+        <p>Votre présence est le plus beau des cadeaux. Si vous souhaitez néanmoins nous gâter, une cagnotte pour notre voyage de noces est disponible sur demande.</p>
+      </div>
+      <div class="practical-card">
+        <h3>Contact</h3>
+        <p>Une question ? Écrivez-nous à camille-antoine@example.com ou contactez notre témoin, Julie, au 06 00 00 00 00.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- RSVP ---------- -->
+<section id="rsvp">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Confirmez votre présence</h2>
+      <p>Merci de répondre avant le 1er avril 2027.</p>
+    </div>
+
+    <form class="rsvp-form" id="rsvpForm">
+      <div class="field-row">
+        <div class="field">
+          <label for="fullname">Nom et prénom</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="attending">Serez-vous présent(e) ?</label>
+          <select id="attending" name="attending" required>
+            <option value="">Choisir une réponse</option>
+            <option value="oui">Oui, avec joie</option>
+            <option value="non">Non, je ne pourrai pas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="guests">Nombre de personnes</label>
+          <input type="number" id="guests" name="guests" min="1" max="6" value="1">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="meal">Préférence de menu</label>
+        <select id="meal" name="meal">
+          <option value="standard">Menu standard</option>
+          <option value="vegetarien">Végétarien</option>
+          <option value="vegan">Vegan</option>
+          <option value="allergie">Allergie / autre (précisez en message)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Un message pour nous ?</label>
+        <textarea id="message" name="message" placeholder="Allergies, mot doux, question..."></textarea>
+      </div>
+
+      <p class="rsvp-note">Ceci est une page de démonstration : les réponses ne sont pas encore transmises à une base de données réelle.</p>
+      <button type="submit" class="rsvp-submit">Envoyer ma réponse</button>
+    </form>
+
+    <div class="rsvp-confirm" id="rsvpConfirm">
+      <h3>Merci !</h3>
+      <p id="rsvpConfirmText"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="script">C &amp; A</span>
+  <p>Avec toute notre tendresse, à très bientôt.</p>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const form = document.getElementById('rsvpForm');
+  const confirmBox = document.getElementById('rsvpConfirm');
+  const confirmText = document.getElementById('rsvpConfirmText');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('fullname').value.trim();
+    const attending = document.getElementById('attending').value;
+    form.style.display = 'none';
+    confirmBox.style.display = 'block';
+    confirmText.textContent = attending === 'oui'
+      ? `${name}, nous avons hâte de célébrer ce jour avec vous.`
+      : `${name}, merci de nous avoir prévenus, vous serez avec nous par la pensée.`;
+  });
+</script>
+
+</body>
+</html>
