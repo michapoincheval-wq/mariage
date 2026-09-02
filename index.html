@@ -9,15 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ivory:#FBF7F1;
-    --ivory-deep:#F3ECE1;
-    --green:#3E4B36;
-    --green-deep:#2A3324;
-    --rose:#C08791;
-    --rose-soft:#E7CDD1;
-    --gold:#AD8A50;
-    --ink:#2C2A24;
-    --line:#D9CFBE;
+    --ivory:#FFFDFB;
+    --ivory-deep:#FCF3EC;
+    --green:#7C8560;
+    --green-deep:#5C6446;
+    --rose:#D6407E;
+    --rose-soft:#F6D9E6;
+    --coral:#E8823D;
+    --coral-deep:#CE6A2C;
+    --red:#C43B4E;
+    --gold:#E8823D;
+    --ink:#3A362E;
+    --line:#F0DFCF;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -34,7 +37,7 @@
     font-family:'Cormorant Garamond', serif;
     font-weight:500;
     margin:0;
-    color:var(--green-deep);
+    color:var(--coral-deep);
   }
   a{color:inherit;}
   .wrap{max-width:920px;margin:0 auto;padding:0 28px;}
@@ -96,13 +99,15 @@
     font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
   }
   .hero h1{
-    font-size:clamp(48px,9vw,92px);
-    line-height:1.05;
+    font-size:clamp(42px,8vw,76px);
+    line-height:1.15;
     margin:18px 0;
-    letter-spacing:0.5px;
+    letter-spacing:6px;
+    text-transform:uppercase;
   }
   .hero .amp{
-    display:block;font-style:italic;color:var(--rose);font-size:0.55em;margin:6px 0;
+    display:inline-block;font-style:italic;color:var(--rose);font-size:0.7em;margin:0 14px;
+    text-transform:none;letter-spacing:0;
   }
   .hero-date{
     font-size:19px;letter-spacing:1px;color:var(--green);
@@ -119,6 +124,29 @@
   .section-head{text-align:center;margin-bottom:56px;}
   .section-head h2{font-size:clamp(30px,4vw,42px);}
   .section-head p{color:#6b6656;font-size:16px;max-width:520px;margin:14px auto 0;}
+
+  /* ---------- ICON OVERVIEW ---------- */
+  .icon-overview{
+    display:flex;align-items:flex-start;justify-content:center;
+    gap:36px;margin:0 auto 70px;max-width:640px;
+    text-align:center;
+  }
+  .icon-item{flex:1;}
+  .icon-item svg{width:56px;height:56px;}
+  .icon-item h3{
+    font-size:19px;margin-top:14px;line-height:1.3;
+  }
+  .icon-time{
+    font-size:14px;color:var(--coral-deep);letter-spacing:1px;margin-top:8px;
+  }
+  .icon-sep{
+    color:var(--line);font-size:20px;padding-top:18px;
+  }
+  @media (max-width:600px){
+    .icon-overview{gap:14px;}
+    .icon-item svg{width:44px;height:44px;}
+    .icon-item h3{font-size:16px;}
+  }
 
   /* ---------- PROGRAMME (timeline, legitimate sequence) ---------- */
   .timeline{
@@ -162,7 +190,7 @@
     padding:18px 0;
   }
   .place-card:last-child{border-bottom:1px solid var(--line);}
-  .place-card .name{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--green-deep);}
+  .place-card .name{font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:1px;text-transform:uppercase;color:var(--coral-deep);}
   .place-card .meta{font-size:13.5px;color:#8a8570;margin-top:3px;}
 
   /* ---------- GALLERY ---------- */
@@ -271,27 +299,37 @@
 
 <!-- ---------- HERO ---------- -->
 <header class="hero">
-  <svg class="hero-branch tl" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 10 C 40 40, 60 60, 90 80 C 120 100, 140 110, 170 115" stroke="#C08791" stroke-width="1.2"/>
-    <path d="M40 30 C 55 35, 62 45, 60 58" stroke="#3E4B36" stroke-width="1.2"/>
-    <path d="M70 60 C 85 62, 92 72, 88 85" stroke="#3E4B36" stroke-width="1.2"/>
-    <path d="M105 88 C 120 88, 128 98, 122 110" stroke="#3E4B36" stroke-width="1.2"/>
-    <circle cx="60" cy="58" r="4" fill="#E7CDD1"/>
-    <circle cx="88" cy="85" r="4" fill="#E7CDD1"/>
-    <circle cx="122" cy="110" r="4" fill="#E7CDD1"/>
+  <svg class="hero-branch tl" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 45 30, 70 55, 95 90 C 115 118, 130 135, 160 148" stroke="#D6407E" stroke-width="1.1" opacity="0.55"/>
+    <path d="M30 14 C 45 30, 50 45, 42 58" stroke="#7C8560" stroke-width="1.3" opacity="0.7"/>
+    <path d="M60 46 C 75 55, 80 68, 70 80" stroke="#7C8560" stroke-width="1.3" opacity="0.7"/>
+    <g opacity="0.9">
+      <circle cx="26" cy="20" r="17" fill="#E8823D" opacity="0.55"/>
+      <circle cx="14" cy="34" r="13" fill="#C43B4E" opacity="0.55"/>
+      <circle cx="40" cy="12" r="11" fill="#F0A6C4" opacity="0.6"/>
+      <circle cx="52" cy="34" r="9" fill="#D6407E" opacity="0.45"/>
+      <circle cx="8" cy="10" r="8" fill="#F0A6C4" opacity="0.5"/>
+    </g>
+    <circle cx="70" cy="80" r="4" fill="#F6D9E6"/>
+    <circle cx="42" cy="58" r="4" fill="#F6D9E6"/>
   </svg>
-  <svg class="hero-branch br" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 10 C 40 40, 60 60, 90 80 C 120 100, 140 110, 170 115" stroke="#C08791" stroke-width="1.2"/>
-    <path d="M40 30 C 55 35, 62 45, 60 58" stroke="#3E4B36" stroke-width="1.2"/>
-    <path d="M70 60 C 85 62, 92 72, 88 85" stroke="#3E4B36" stroke-width="1.2"/>
-    <path d="M105 88 C 120 88, 128 98, 122 110" stroke="#3E4B36" stroke-width="1.2"/>
-    <circle cx="60" cy="58" r="4" fill="#E7CDD1"/>
-    <circle cx="88" cy="85" r="4" fill="#E7CDD1"/>
-    <circle cx="122" cy="110" r="4" fill="#E7CDD1"/>
+  <svg class="hero-branch br" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 45 30, 70 55, 95 90 C 115 118, 130 135, 160 148" stroke="#D6407E" stroke-width="1.1" opacity="0.55"/>
+    <path d="M30 14 C 45 30, 50 45, 42 58" stroke="#7C8560" stroke-width="1.3" opacity="0.7"/>
+    <path d="M60 46 C 75 55, 80 68, 70 80" stroke="#7C8560" stroke-width="1.3" opacity="0.7"/>
+    <g opacity="0.9">
+      <circle cx="26" cy="20" r="17" fill="#E8823D" opacity="0.55"/>
+      <circle cx="14" cy="34" r="13" fill="#C43B4E" opacity="0.55"/>
+      <circle cx="40" cy="12" r="11" fill="#F0A6C4" opacity="0.6"/>
+      <circle cx="52" cy="34" r="9" fill="#D6407E" opacity="0.45"/>
+      <circle cx="8" cy="10" r="8" fill="#F0A6C4" opacity="0.5"/>
+    </g>
+    <circle cx="70" cy="80" r="4" fill="#F6D9E6"/>
+    <circle cx="42" cy="58" r="4" fill="#F6D9E6"/>
   </svg>
 
   <p class="hero-eyebrow">Nous nous marions</p>
-  <h1>Camille<span class="amp">&amp;</span>Antoine</h1>
+  <h1>Camille <span class="amp">&amp;</span> Antoine</h1>
   <p class="hero-date">12 juin 2027</p>
   <p class="hero-venue">Domaine de la Rosaie · Provence, France</p>
   <p class="hero-scroll">↓ découvrir la journée</p>
@@ -304,6 +342,46 @@
       <h2>Le programme du jour</h2>
       <p>Une journée pensée pour profiter de chaque instant, entourés de ceux qu'on aime.</p>
     </div>
+
+    <div class="icon-overview">
+      <div class="icon-item">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 10 L24 34 C24 40 30 42 30 42 L30 54 M24 34 C24 34 16 34 14 28" stroke="#D6407E" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M44 10 L40 34 C40 40 34 42 34 42 L34 54" stroke="#D6407E" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M15 10 C20 8 24 8 28 10 C24 13 20 13 15 10 Z" stroke="#D6407E" stroke-width="1.3"/>
+          <path d="M49 10 C44 8 40 8 36 10 C40 13 44 13 49 10 Z" stroke="#D6407E" stroke-width="1.3"/>
+          <path d="M26 54 L38 54" stroke="#D6407E" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="12" cy="16" r="1.6" fill="#D6407E"/>
+          <circle cx="18" cy="6" r="1.6" fill="#D6407E"/>
+        </svg>
+        <h3>Verre de bienvenue</h3>
+        <p class="icon-time">14h00</p>
+      </div>
+      <div class="icon-sep">|</div>
+      <div class="icon-item">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="16" y="24" width="32" height="26" rx="3" stroke="#E8823D" stroke-width="1.4"/>
+          <path d="M16 24 C16 14 48 14 48 24" stroke="#E8823D" stroke-width="1.4"/>
+          <circle cx="32" cy="38" r="7" stroke="#E8823D" stroke-width="1.3"/>
+          <path d="M32 31 L32 26 L36 24" stroke="#E8823D" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <h3>Mariage civil<br>à la mairie</h3>
+        <p class="icon-time">15h00</p>
+      </div>
+      <div class="icon-sep">|</div>
+      <div class="icon-item">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 8 L38 8 L36 26 C36 30 28 30 28 26 Z" stroke="#D6407E" stroke-width="1.4"/>
+          <path d="M28 26 L27 52 C27 55 37 55 37 52 L36 26" stroke="#D6407E" stroke-width="1.4"/>
+          <path d="M27 34 L37 34" stroke="#D6407E" stroke-width="1"/>
+          <path d="M46 30 L46 52 M40 40 L52 40" stroke="#D6407E" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M46 40 C40 40 40 44 46 44 C52 44 52 40 46 40" stroke="#D6407E" stroke-width="1.2"/>
+        </svg>
+        <h3>Cocktail &amp; dîner<br>festif</h3>
+        <p class="icon-time">17h00</p>
+      </div>
+    </div>
+
     <div class="timeline">
       <div class="t-item">
         <div class="t-time">15h00</div>
