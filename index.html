@@ -6,7 +6,7 @@
 <title>Camille &amp; Antoine — 12 juin 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mrs+Saint+Delafield&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --ivory:#FFFDFB;
@@ -21,6 +21,11 @@
     --gold:#E8823D;
     --ink:#3A362E;
     --line:#F0DFCF;
+    --teal:#5B8C87;
+  }
+  .script-name{
+    font-family:'Mrs Saint Delafield', cursive;
+    font-weight:400;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -40,7 +45,7 @@
     color:var(--coral-deep);
   }
   a{color:inherit;}
-  .wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
   section{padding:110px 0;}
   .rule{
     width:56px;height:1px;background:var(--gold);
@@ -60,7 +65,7 @@
     padding-top:16px;padding-bottom:16px;
   }
   .nav-name{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:0.5px;color:var(--green-deep);}
-  .nav-links{display:flex;gap:26px;list-style:none;margin:0;padding:0;}
+  .nav-links{display:flex;gap:22px;list-style:none;margin:0;padding:0;}
   .nav-links a{
     font-size:14px;text-decoration:none;color:var(--ink);
     padding-bottom:3px;border-bottom:1px solid transparent;
@@ -68,6 +73,15 @@
   }
   .nav-links a:hover{border-color:var(--rose);color:var(--green-deep);}
   .nav-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--green-deep);}
+  .nav-right{display:flex;align-items:center;gap:16px;}
+  .lang-toggle{display:flex;align-items:center;gap:5px;}
+  .lang-btn{
+    background:none;border:none;cursor:pointer;
+    font-family:'Jost',sans-serif;font-size:12.5px;letter-spacing:0.5px;
+    color:#9a9482;padding:3px 2px;
+  }
+  .lang-btn.active{color:var(--coral-deep);border-bottom:1px solid var(--coral-deep);}
+  .lang-sep{color:var(--line);font-size:12px;}
 
   @media (max-width:720px){
     .nav-links{
@@ -99,15 +113,18 @@
     font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
   }
   .hero h1{
-    font-size:clamp(42px,8vw,76px);
-    line-height:1.15;
-    margin:18px 0;
-    letter-spacing:6px;
-    text-transform:uppercase;
+    font-family:'Mrs Saint Delafield', cursive;
+    font-weight:400;
+    font-size:clamp(56px,11vw,110px);
+    line-height:1.1;
+    margin:14px 0 6px;
+    letter-spacing:1px;
   }
   .hero .amp{
-    display:inline-block;font-style:italic;color:var(--rose);font-size:0.7em;margin:0 14px;
-    text-transform:none;letter-spacing:0;
+    display:inline-block;color:var(--rose);font-size:0.85em;margin:0 10px;
+  }
+  .hero-invite{
+    font-size:15.5px;color:#7a7462;letter-spacing:0.3px;margin-top:2px;
   }
   .hero-date{
     font-size:19px;letter-spacing:1px;color:var(--green);
@@ -122,8 +139,20 @@
 
   /* ---------- SECTION HEADERS ---------- */
   .section-head{text-align:center;margin-bottom:56px;}
+  .section-head .bouquet{margin:0 auto 6px;display:block;width:46px;height:46px;}
   .section-head h2{font-size:clamp(30px,4vw,42px);}
   .section-head p{color:#6b6656;font-size:16px;max-width:520px;margin:14px auto 0;}
+
+  /* ---------- CORNER BLOOMS (section decoration) ---------- */
+  .bloom-section{position:relative;overflow:hidden;}
+  .corner-bloom{position:absolute;pointer-events:none;opacity:0.5;z-index:0;width:160px;height:160px;}
+  .corner-bloom.tl{top:-24px;left:-24px;}
+  .corner-bloom.tr{top:-24px;right:-24px;transform:scaleX(-1);}
+  .corner-bloom.bl{bottom:-24px;left:-24px;transform:scaleY(-1);}
+  .corner-bloom.br{bottom:-24px;right:-24px;transform:rotate(180deg);}
+  @media (max-width:680px){
+    .corner-bloom{width:110px;height:110px;opacity:0.4;}
+  }
 
   /* ---------- ICON OVERVIEW ---------- */
   .icon-overview{
@@ -200,12 +229,28 @@
     gap:14px;
   }
   @media (max-width:680px){.gallery{grid-template-columns:repeat(2,1fr);}}
+  .gallery-sub{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
+    font-size:22px;color:var(--coral-deep);text-align:center;
+    margin:0 0 22px;
+  }
+  .gallery-couple{
+    grid-template-columns:1.15fr 1fr;
+    grid-template-rows:repeat(2,1fr);
+    margin-bottom:64px;
+  }
+  .gallery-couple .g-item.tall{grid-row:1 / 3;}
+  @media (max-width:680px){
+    .gallery-couple{grid-template-columns:1fr;grid-template-rows:none;}
+    .gallery-couple .g-item.tall{grid-row:auto;}
+  }
   .g-item{
     aspect-ratio:1;
     background:linear-gradient(155deg,var(--ivory-deep),var(--rose-soft));
     display:flex;align-items:center;justify-content:center;
     color:#a3927a;font-size:13px;font-family:'Cormorant Garamond',serif;font-style:italic;
     border:1px solid var(--line);
+    text-align:center;padding:8px;
   }
   .g-item:nth-child(3n+2){background:linear-gradient(155deg,#EFE9DC,var(--ivory-deep));}
   .g-item:nth-child(4n){aspect-ratio:1/1.3;}
@@ -222,6 +267,30 @@
   }
   .practical-card h3{font-size:22px;margin-bottom:10px;}
   .practical-card p{font-size:14.5px;color:#5a5647;margin:0;}
+
+  /* ---------- CAGNOTTE ---------- */
+  .cagnotte-card{
+    max-width:600px;margin:0 auto;
+    text-align:center;
+    background:var(--ivory-deep);
+    border:1px solid var(--line);
+    padding:52px 40px;
+    position:relative;
+  }
+  .cagnotte-card svg{width:52px;height:52px;margin:0 auto 18px;display:block;}
+  .cagnotte-card h3{font-size:26px;margin-bottom:14px;}
+  .cagnotte-card p{font-size:15px;color:#5a5647;margin:0 auto 26px;max-width:440px;}
+  .cagnotte-btn{
+    display:inline-block;
+    background:var(--rose);
+    color:var(--ivory);
+    text-decoration:none;
+    padding:14px 36px;
+    font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:0.5px;
+    transition:background .25s ease;
+  }
+  .cagnotte-btn:hover{background:var(--coral-deep);}
+  .cagnotte-note{font-size:12.5px;color:#a3927a;margin-top:18px;max-width:none;}
 
   /* ---------- RSVP ---------- */
   .rsvp-form{
@@ -272,28 +341,50 @@
   footer{
     text-align:center;padding:70px 24px 50px;
     color:#8a8570;font-size:13.5px;
+    position:relative;
   }
   footer .script{color:var(--rose);font-size:22px;margin-bottom:10px;display:block;}
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
   }
+
+  /* ---------- PAGE FRAME ---------- */
+  .page-frame{
+    position:fixed;inset:12px;
+    border:1px solid var(--gold);
+    opacity:0.4;
+    pointer-events:none;
+    z-index:55;
+  }
+  @media (max-width:600px){
+    .page-frame{inset:7px;}
+  }
 </style>
 </head>
 <body>
+<div class="page-frame" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap">
     <div class="nav-name">C &amp; A</div>
-    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#programme">Programme</a></li>
-      <li><a href="#itineraire">Itinéraire</a></li>
-      <li><a href="#logement">Logement</a></li>
-      <li><a href="#galerie">Galerie</a></li>
-      <li><a href="#infos">Infos</a></li>
+      <li><a href="#programme" data-i18n="navProgramme">Programme</a></li>
+      <li><a href="#itineraire" data-i18n="navItineraire">Itinéraire</a></li>
+      <li><a href="#logement" data-i18n="navLogement">Logement</a></li>
+      <li><a href="#galerie" data-i18n="navGalerie">Galerie</a></li>
+      <li><a href="#infos" data-i18n="navInfos">Infos</a></li>
+      <li><a href="#cagnotte" data-i18n="navCagnotte">Cagnotte</a></li>
       <li><a href="#rsvp">RSVP</a></li>
     </ul>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button type="button" class="lang-btn active" data-lang-btn="fr">FR</button>
+        <span class="lang-sep">/</span>
+        <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -328,19 +419,40 @@
     <circle cx="42" cy="58" r="4" fill="#F6D9E6"/>
   </svg>
 
-  <p class="hero-eyebrow">Nous nous marions</p>
+  <p class="hero-eyebrow" data-i18n="heroEyebrow">Nous nous marions</p>
   <h1>Camille <span class="amp">&amp;</span> Antoine</h1>
-  <p class="hero-date">12 juin 2027</p>
+  <p class="hero-invite" data-i18n="heroInvite">sont heureux de vous faire part de leur mariage</p>
+  <div class="rule"></div>
+  <p class="hero-date" data-i18n="heroDate">12 juin 2027</p>
   <p class="hero-venue">Domaine de la Rosaie · Provence, France</p>
-  <p class="hero-scroll">↓ découvrir la journée</p>
+  <p class="hero-scroll" data-i18n="heroScroll">↓ découvrir la journée</p>
 </header>
 
 <!-- ---------- PROGRAMME ---------- -->
-<section id="programme">
+<section id="programme" class="bloom-section">
+  <svg class="corner-bloom tl" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 30 20, 46 36, 60 60" stroke="#D6407E" stroke-width="1" opacity="0.5"/>
+    <path d="M20 10 C 30 22, 32 34, 26 42" stroke="#7C8560" stroke-width="1.1" opacity="0.7"/>
+    <circle cx="18" cy="14" r="12" fill="#E8823D" opacity="0.5"/>
+    <circle cx="9" cy="24" r="9" fill="#C43B4E" opacity="0.5"/>
+    <circle cx="28" cy="8" r="8" fill="#F0A6C4" opacity="0.55"/>
+    <circle cx="34" cy="24" r="6" fill="#D6407E" opacity="0.4"/>
+    <circle cx="26" cy="42" r="3" fill="#F6D9E6"/>
+  </svg>
   <div class="wrap">
     <div class="section-head">
-      <h2>Le programme du jour</h2>
-      <p>Une journée pensée pour profiter de chaque instant, entourés de ceux qu'on aime.</p>
+      <svg class="bouquet" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="16" r="8" fill="#E8823D" opacity="0.55"/>
+        <circle cx="12" cy="22" r="6" fill="#C43B4E" opacity="0.55"/>
+        <circle cx="27" cy="22" r="6.5" fill="#F0A6C4" opacity="0.6"/>
+        <circle cx="20" cy="27" r="5" fill="#D6407E" opacity="0.45"/>
+        <path d="M20 30 L20 40" stroke="#7C8560" stroke-width="1.2"/>
+        <path d="M20 34 C 24 33, 26 30, 26 28" stroke="#7C8560" stroke-width="1.1"/>
+        <path d="M20 36 C 16 35, 14 32, 14 30" stroke="#7C8560" stroke-width="1.1"/>
+        <circle cx="33" cy="16" r="2" fill="#5B8C87"/>
+      </svg>
+      <h2 data-i18n="progH2">Le programme du jour</h2>
+      <p data-i18n="progP">Une journée pensée pour profiter de chaque instant, entourés de ceux qu'on aime.</p>
     </div>
 
     <div class="icon-overview">
@@ -354,8 +466,8 @@
           <circle cx="12" cy="16" r="1.6" fill="#D6407E"/>
           <circle cx="18" cy="6" r="1.6" fill="#D6407E"/>
         </svg>
-        <h3>Verre de bienvenue</h3>
-        <p class="icon-time">14h00</p>
+        <h3 data-i18n="icon1Title">Verre de bienvenue</h3>
+        <p class="icon-time" data-i18n="icon1Time">14h00</p>
       </div>
       <div class="icon-sep">|</div>
       <div class="icon-item">
@@ -365,8 +477,8 @@
           <circle cx="32" cy="38" r="7" stroke="#E8823D" stroke-width="1.3"/>
           <path d="M32 31 L32 26 L36 24" stroke="#E8823D" stroke-width="1.3" stroke-linecap="round"/>
         </svg>
-        <h3>Mariage civil<br>à la mairie</h3>
-        <p class="icon-time">15h00</p>
+        <h3 data-i18n="icon2Title">Mariage civil<br>à la mairie</h3>
+        <p class="icon-time" data-i18n="icon2Time">15h00</p>
       </div>
       <div class="icon-sep">|</div>
       <div class="icon-item">
@@ -377,38 +489,38 @@
           <path d="M46 30 L46 52 M40 40 L52 40" stroke="#D6407E" stroke-width="1.3" stroke-linecap="round"/>
           <path d="M46 40 C40 40 40 44 46 44 C52 44 52 40 46 40" stroke="#D6407E" stroke-width="1.2"/>
         </svg>
-        <h3>Cocktail &amp; dîner<br>festif</h3>
-        <p class="icon-time">17h00</p>
+        <h3 data-i18n="icon3Title">Cocktail &amp; dîner<br>festif</h3>
+        <p class="icon-time" data-i18n="icon3Time">17h00</p>
       </div>
     </div>
 
     <div class="timeline">
       <div class="t-item">
-        <div class="t-time">15h00</div>
+        <div class="t-time" data-i18n="t1Time">15h00</div>
         <div class="t-body">
-          <h3>Cérémonie</h3>
-          <p>Sous le grand chêne du domaine. Arrivée conseillée 20 minutes avant.</p>
+          <h3 data-i18n="t1Title">Cérémonie</h3>
+          <p data-i18n="t1Desc">Sous le grand chêne du domaine. Arrivée conseillée 20 minutes avant.</p>
         </div>
       </div>
       <div class="t-item">
-        <div class="t-time">16h00</div>
+        <div class="t-time" data-i18n="t2Time">16h00</div>
         <div class="t-body">
-          <h3>Vin d'honneur</h3>
-          <p>Cocktail et petits fours dans les jardins.</p>
+          <h3 data-i18n="t2Title">Vin d'honneur</h3>
+          <p data-i18n="t2Desc">Cocktail et petits fours dans les jardins.</p>
         </div>
       </div>
       <div class="t-item">
-        <div class="t-time">19h00</div>
+        <div class="t-time" data-i18n="t3Time">19h00</div>
         <div class="t-body">
-          <h3>Dîner</h3>
-          <p>Sous la verrière, discours et menu de saison.</p>
+          <h3 data-i18n="t3Title">Dîner</h3>
+          <p data-i18n="t3Desc">Sous la verrière, discours et menu de saison.</p>
         </div>
       </div>
       <div class="t-item">
-        <div class="t-time">22h00</div>
+        <div class="t-time" data-i18n="t4Time">22h00</div>
         <div class="t-body">
-          <h3>Soirée dansante</h3>
-          <p>Ouverture de bal, puis piste ouverte jusqu'au bout de la nuit.</p>
+          <h3 data-i18n="t4Title">Soirée dansante</h3>
+          <p data-i18n="t4Desc">Ouverture de bal, puis piste ouverte jusqu'au bout de la nuit.</p>
         </div>
       </div>
     </div>
@@ -416,32 +528,51 @@
 </section>
 
 <!-- ---------- ITINERAIRE & LOGEMENT ---------- -->
-<section id="itineraire" style="background:var(--ivory-deep);">
+<section id="itineraire" class="bloom-section" style="background:var(--ivory-deep);">
+  <svg class="corner-bloom tr" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 30 20, 46 36, 60 60" stroke="#D6407E" stroke-width="1" opacity="0.5"/>
+    <path d="M20 10 C 30 22, 32 34, 26 42" stroke="#7C8560" stroke-width="1.1" opacity="0.7"/>
+    <circle cx="18" cy="14" r="12" fill="#C43B4E" opacity="0.5"/>
+    <circle cx="9" cy="24" r="9" fill="#E8823D" opacity="0.5"/>
+    <circle cx="28" cy="8" r="8" fill="#F0A6C4" opacity="0.55"/>
+    <circle cx="34" cy="24" r="6" fill="#D6407E" opacity="0.4"/>
+    <circle cx="26" cy="42" r="3" fill="#F6D9E6"/>
+  </svg>
   <div class="wrap">
     <div class="section-head">
-      <h2>S'y rendre &amp; se loger</h2>
-      <p>Toutes les informations pratiques pour organiser votre venue.</p>
+      <svg class="bouquet" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="16" r="8" fill="#E8823D" opacity="0.55"/>
+        <circle cx="12" cy="22" r="6" fill="#C43B4E" opacity="0.55"/>
+        <circle cx="27" cy="22" r="6.5" fill="#F0A6C4" opacity="0.6"/>
+        <circle cx="20" cy="27" r="5" fill="#D6407E" opacity="0.45"/>
+        <path d="M20 30 L20 40" stroke="#7C8560" stroke-width="1.2"/>
+        <path d="M20 34 C 24 33, 26 30, 26 28" stroke="#7C8560" stroke-width="1.1"/>
+        <path d="M20 36 C 16 35, 14 32, 14 30" stroke="#7C8560" stroke-width="1.1"/>
+        <circle cx="33" cy="16" r="2" fill="#5B8C87"/>
+      </svg>
+      <h2 data-i18n="itinH2">S'y rendre &amp; se loger</h2>
+      <p data-i18n="itinP">Toutes les informations pratiques pour organiser votre venue.</p>
     </div>
     <div class="info-grid">
       <div class="info-block">
-        <h3>Itinéraire</h3>
+        <h3 data-i18n="itinBlockH3">Itinéraire</h3>
         <p>Domaine de la Rosaie, 12 Chemin des Lavandes, 84800 Provence.</p>
-        <p>À 45 min d'Avignon TGV, 1h20 de Marseille-Provence. Parking gratuit sur place.</p>
-        <p>Une navette partira de la place du village à 14h15 pour les invités sans voiture.</p>
+        <p data-i18n="itinP2">À 45 min d'Avignon TGV, 1h20 de Marseille-Provence. Parking gratuit sur place.</p>
+        <p data-i18n="itinP3">Une navette partira de la place du village à 14h15 pour les invités sans voiture.</p>
       </div>
-      <div class="info-block">
-        <h3>Où dormir</h3>
+      <div class="info-block" id="logement">
+        <h3 data-i18n="logeH3">Où dormir</h3>
         <div class="place-card">
           <div class="name">Le Mas des Oliviers</div>
-          <div class="meta">10 min du domaine · quelques chambres réservées pour nos invités</div>
+          <div class="meta" data-i18n="place1">10 min du domaine · quelques chambres réservées pour nos invités</div>
         </div>
         <div class="place-card">
           <div class="name">Auberge du Vieux Puits</div>
-          <div class="meta">15 min du domaine · charme provençal, tarif de groupe</div>
+          <div class="meta" data-i18n="place2">15 min du domaine · charme provençal, tarif de groupe</div>
         </div>
         <div class="place-card">
           <div class="name">Camping Les Cigales</div>
-          <div class="meta">20 min du domaine · option économique</div>
+          <div class="meta" data-i18n="place3">20 min du domaine · option économique</div>
         </div>
       </div>
     </div>
@@ -449,118 +580,335 @@
 </section>
 
 <!-- ---------- GALERIE ---------- -->
-<section id="galerie">
+<section id="galerie" class="bloom-section">
+  <svg class="corner-bloom bl" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 30 20, 46 36, 60 60" stroke="#D6407E" stroke-width="1" opacity="0.5"/>
+    <path d="M20 10 C 30 22, 32 34, 26 42" stroke="#7C8560" stroke-width="1.1" opacity="0.7"/>
+    <circle cx="18" cy="14" r="12" fill="#F0A6C4" opacity="0.55"/>
+    <circle cx="9" cy="24" r="9" fill="#C43B4E" opacity="0.5"/>
+    <circle cx="28" cy="8" r="8" fill="#E8823D" opacity="0.5"/>
+    <circle cx="34" cy="24" r="6" fill="#D6407E" opacity="0.4"/>
+    <circle cx="26" cy="42" r="3" fill="#F6D9E6"/>
+  </svg>
   <div class="wrap">
     <div class="section-head">
-      <h2>Quelques souvenirs</h2>
-      <p>Les photos du jour viendront s'ajouter ici après la cérémonie.</p>
+      <svg class="bouquet" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="16" r="8" fill="#E8823D" opacity="0.55"/>
+        <circle cx="12" cy="22" r="6" fill="#C43B4E" opacity="0.55"/>
+        <circle cx="27" cy="22" r="6.5" fill="#F0A6C4" opacity="0.6"/>
+        <circle cx="20" cy="27" r="5" fill="#D6407E" opacity="0.45"/>
+        <path d="M20 30 L20 40" stroke="#7C8560" stroke-width="1.2"/>
+        <path d="M20 34 C 24 33, 26 30, 26 28" stroke="#7C8560" stroke-width="1.1"/>
+        <path d="M20 36 C 16 35, 14 32, 14 30" stroke="#7C8560" stroke-width="1.1"/>
+        <circle cx="33" cy="16" r="2" fill="#5B8C87"/>
+      </svg>
+      <h2 data-i18n="galH2">Quelques souvenirs</h2>
+      <p data-i18n="galP">Les photos viendront s'ajouter ici — un espace pour nous deux, un autre pour le lieu.</p>
     </div>
+
+    <h3 class="gallery-sub" data-i18n="galSubUs">Nous deux</h3>
+    <div class="gallery gallery-couple">
+      <div class="g-item tall" data-i18n="galItemUs">photo de nous à venir</div>
+      <div class="g-item" data-i18n="galItemUs">photo de nous à venir</div>
+      <div class="g-item" data-i18n="galItemUs">photo de nous à venir</div>
+    </div>
+
+    <h3 class="gallery-sub" data-i18n="galSubVenue">Le lieu</h3>
     <div class="gallery">
-      <div class="g-item">photo à venir</div>
-      <div class="g-item">photo à venir</div>
-      <div class="g-item">photo à venir</div>
-      <div class="g-item">photo à venir</div>
-      <div class="g-item">photo à venir</div>
-      <div class="g-item">photo à venir</div>
+      <div class="g-item" data-i18n="galItemVenue">photo du lieu à venir</div>
+      <div class="g-item" data-i18n="galItemVenue">photo du lieu à venir</div>
+      <div class="g-item" data-i18n="galItemVenue">photo du lieu à venir</div>
+      <div class="g-item" data-i18n="galItemVenue">photo du lieu à venir</div>
+      <div class="g-item" data-i18n="galItemVenue">photo du lieu à venir</div>
+      <div class="g-item" data-i18n="galItemVenue">photo du lieu à venir</div>
     </div>
   </div>
 </section>
 
-<!-- ---------- INFOS PRATIQUES / CADEAUX ---------- -->
-<section id="infos" style="background:var(--ivory-deep);">
+<!-- ---------- INFOS PRATIQUES ---------- -->
+<section id="infos" class="bloom-section" style="background:var(--ivory-deep);">
+  <svg class="corner-bloom tr" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 30 20, 46 36, 60 60" stroke="#D6407E" stroke-width="1" opacity="0.5"/>
+    <path d="M20 10 C 30 22, 32 34, 26 42" stroke="#7C8560" stroke-width="1.1" opacity="0.7"/>
+    <circle cx="18" cy="14" r="12" fill="#E8823D" opacity="0.5"/>
+    <circle cx="9" cy="24" r="9" fill="#D6407E" opacity="0.45"/>
+    <circle cx="28" cy="8" r="8" fill="#C43B4E" opacity="0.5"/>
+    <circle cx="34" cy="24" r="6" fill="#F0A6C4" opacity="0.55"/>
+    <circle cx="26" cy="42" r="3" fill="#F6D9E6"/>
+  </svg>
   <div class="wrap">
     <div class="section-head">
-      <h2>Infos pratiques</h2>
-      <p>Tout ce qu'il faut savoir avant le grand jour.</p>
+      <svg class="bouquet" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="16" r="8" fill="#E8823D" opacity="0.55"/>
+        <circle cx="12" cy="22" r="6" fill="#C43B4E" opacity="0.55"/>
+        <circle cx="27" cy="22" r="6.5" fill="#F0A6C4" opacity="0.6"/>
+        <circle cx="20" cy="27" r="5" fill="#D6407E" opacity="0.45"/>
+        <path d="M20 30 L20 40" stroke="#7C8560" stroke-width="1.2"/>
+        <path d="M20 34 C 24 33, 26 30, 26 28" stroke="#7C8560" stroke-width="1.1"/>
+        <path d="M20 36 C 16 35, 14 32, 14 30" stroke="#7C8560" stroke-width="1.1"/>
+        <circle cx="33" cy="16" r="2" fill="#5B8C87"/>
+      </svg>
+      <h2 data-i18n="infosH2">Infos pratiques</h2>
+      <p data-i18n="infosP">Tout ce qu'il faut savoir avant le grand jour.</p>
     </div>
     <div class="practical">
       <div class="practical-card">
-        <h3>Tenue</h3>
-        <p>Élégant champêtre. Prévoyez des chaussures confortables : la cérémonie et le vin d'honneur se déroulent sur l'herbe.</p>
+        <h3 data-i18n="tenueH3">Tenue</h3>
+        <p data-i18n="tenueP">Élégant champêtre. Prévoyez des chaussures confortables : la cérémonie et le vin d'honneur se déroulent sur l'herbe.</p>
       </div>
       <div class="practical-card">
-        <h3>Enfants</h3>
-        <p>Vos enfants sont les bienvenus. Un espace de jeux encadré sera prévu pendant le dîner.</p>
+        <h3 data-i18n="enfantsH3">Enfants</h3>
+        <p data-i18n="enfantsP">Vos enfants sont les bienvenus. Un espace de jeux encadré sera prévu pendant le dîner.</p>
       </div>
       <div class="practical-card">
-        <h3>Liste de mariage</h3>
-        <p>Votre présence est le plus beau des cadeaux. Si vous souhaitez néanmoins nous gâter, une cagnotte pour notre voyage de noces est disponible sur demande.</p>
+        <h3 data-i18n="listeH3">Liste de mariage</h3>
+        <p data-i18n="listeP">Votre présence est le plus beau des cadeaux. Retrouvez notre cagnotte lune de miel juste en dessous.</p>
       </div>
       <div class="practical-card">
-        <h3>Contact</h3>
-        <p>Une question ? Écrivez-nous à camille-antoine@example.com ou contactez notre témoin, Julie, au 06 00 00 00 00.</p>
+        <h3 data-i18n="contactH3">Contact</h3>
+        <p data-i18n="contactP">Une question ? Écrivez-nous à camille-antoine@example.com ou contactez notre témoin, Julie, au 06 00 00 00 00.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- CAGNOTTE ---------- -->
+<section id="cagnotte" class="bloom-section">
+  <svg class="corner-bloom bl" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 30 20, 46 36, 60 60" stroke="#D6407E" stroke-width="1" opacity="0.5"/>
+    <path d="M20 10 C 30 22, 32 34, 26 42" stroke="#7C8560" stroke-width="1.1" opacity="0.7"/>
+    <circle cx="18" cy="14" r="12" fill="#D6407E" opacity="0.45"/>
+    <circle cx="9" cy="24" r="9" fill="#F0A6C4" opacity="0.55"/>
+    <circle cx="28" cy="8" r="8" fill="#E8823D" opacity="0.5"/>
+    <circle cx="34" cy="24" r="6" fill="#C43B4E" opacity="0.5"/>
+    <circle cx="26" cy="42" r="3" fill="#F6D9E6"/>
+  </svg>
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="bouquet" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="16" r="8" fill="#E8823D" opacity="0.55"/>
+        <circle cx="12" cy="22" r="6" fill="#C43B4E" opacity="0.55"/>
+        <circle cx="27" cy="22" r="6.5" fill="#F0A6C4" opacity="0.6"/>
+        <circle cx="20" cy="27" r="5" fill="#D6407E" opacity="0.45"/>
+        <path d="M20 30 L20 40" stroke="#7C8560" stroke-width="1.2"/>
+        <path d="M20 34 C 24 33, 26 30, 26 28" stroke="#7C8560" stroke-width="1.1"/>
+        <path d="M20 36 C 16 35, 14 32, 14 30" stroke="#7C8560" stroke-width="1.1"/>
+        <circle cx="33" cy="16" r="2" fill="#5B8C87"/>
+      </svg>
+      <h2 data-i18n="cagH2">Notre cagnotte lune de miel</h2>
+      <p data-i18n="cagP">Votre présence compte plus que tout. Si vous souhaitez tout de même nous offrir un geste, participez à notre lune de miel.</p>
+    </div>
+    <div class="cagnotte-card">
+      <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 30 C8 18 18 10 30 12 C38 13 44 20 44 28 L44 34 C44 36 42 38 40 38 L38 38 L38 44 L32 44 L32 38 L18 38 L18 44 L12 44 L12 38 C9 37 8 34 8 30 Z" stroke="#D6407E" stroke-width="1.4"/>
+        <circle cx="34" cy="22" r="1.6" fill="#D6407E"/>
+        <path d="M30 12 L33 6 L37 9" stroke="#D6407E" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <h3 data-i18n="cagCardH3">Direction l'Italie</h3>
+      <p data-i18n="cagCardP">Nous rêvons de partir quelques semaines en Italie après le mariage. Chaque petite participation nous rapprochera de ce voyage.</p>
+      <a href="#" class="cagnotte-btn" data-i18n="cagBtn">Participer à la cagnotte</a>
+      <p class="cagnotte-note" data-i18n="cagNote">Lien à venir — cette section sera activée prochainement.</p>
     </div>
   </div>
 </section>
 
 <!-- ---------- RSVP ---------- -->
-<section id="rsvp">
+<section id="rsvp" class="bloom-section">
+  <svg class="corner-bloom br" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4 C 30 20, 46 36, 60 60" stroke="#D6407E" stroke-width="1" opacity="0.5"/>
+    <path d="M20 10 C 30 22, 32 34, 26 42" stroke="#7C8560" stroke-width="1.1" opacity="0.7"/>
+    <circle cx="18" cy="14" r="12" fill="#C43B4E" opacity="0.5"/>
+    <circle cx="9" cy="24" r="9" fill="#E8823D" opacity="0.5"/>
+    <circle cx="28" cy="8" r="8" fill="#D6407E" opacity="0.4"/>
+    <circle cx="34" cy="24" r="6" fill="#F0A6C4" opacity="0.55"/>
+    <circle cx="26" cy="42" r="3" fill="#F6D9E6"/>
+  </svg>
   <div class="wrap">
     <div class="section-head">
-      <h2>Confirmez votre présence</h2>
-      <p>Merci de répondre avant le 1er avril 2027.</p>
+      <svg class="bouquet" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="16" r="8" fill="#E8823D" opacity="0.55"/>
+        <circle cx="12" cy="22" r="6" fill="#C43B4E" opacity="0.55"/>
+        <circle cx="27" cy="22" r="6.5" fill="#F0A6C4" opacity="0.6"/>
+        <circle cx="20" cy="27" r="5" fill="#D6407E" opacity="0.45"/>
+        <path d="M20 30 L20 40" stroke="#7C8560" stroke-width="1.2"/>
+        <path d="M20 34 C 24 33, 26 30, 26 28" stroke="#7C8560" stroke-width="1.1"/>
+        <path d="M20 36 C 16 35, 14 32, 14 30" stroke="#7C8560" stroke-width="1.1"/>
+        <circle cx="33" cy="16" r="2" fill="#5B8C87"/>
+      </svg>
+      <h2 data-i18n="rsvpH2">Confirmez votre présence</h2>
+      <p data-i18n="rsvpP">Merci de répondre avant le 1er avril 2027.</p>
     </div>
 
     <form class="rsvp-form" id="rsvpForm">
       <div class="field-row">
         <div class="field">
-          <label for="fullname">Nom et prénom</label>
+          <label for="fullname" data-i18n="lblName">Nom et prénom</label>
           <input type="text" id="fullname" name="fullname" required>
         </div>
         <div class="field">
-          <label for="email">Email</label>
+          <label for="email" data-i18n="lblEmail">Email</label>
           <input type="email" id="email" name="email" required>
         </div>
       </div>
 
       <div class="field-row">
         <div class="field">
-          <label for="attending">Serez-vous présent(e) ?</label>
+          <label for="attending" data-i18n="lblAttending">Serez-vous présent(e) ?</label>
           <select id="attending" name="attending" required>
-            <option value="">Choisir une réponse</option>
-            <option value="oui">Oui, avec joie</option>
-            <option value="non">Non, je ne pourrai pas</option>
+            <option value="" data-i18n="optChoose">Choisir une réponse</option>
+            <option value="oui" data-i18n="optYes">Oui, avec joie</option>
+            <option value="non" data-i18n="optNo">Non, je ne pourrai pas</option>
           </select>
         </div>
         <div class="field">
-          <label for="guests">Nombre de personnes</label>
+          <label for="guests" data-i18n="lblGuests">Nombre de personnes</label>
           <input type="number" id="guests" name="guests" min="1" max="6" value="1">
         </div>
       </div>
 
       <div class="field">
-        <label for="meal">Préférence de menu</label>
+        <label for="meal" data-i18n="lblMeal">Préférence de menu</label>
         <select id="meal" name="meal">
-          <option value="standard">Menu standard</option>
-          <option value="vegetarien">Végétarien</option>
-          <option value="vegan">Vegan</option>
-          <option value="allergie">Allergie / autre (précisez en message)</option>
+          <option value="standard" data-i18n="optMealStd">Menu standard</option>
+          <option value="vegetarien" data-i18n="optMealVeg">Végétarien</option>
+          <option value="vegan" data-i18n="optMealVegan">Vegan</option>
+          <option value="allergie" data-i18n="optMealAllergy">Allergie / autre (précisez en message)</option>
         </select>
       </div>
 
       <div class="field">
-        <label for="message">Un message pour nous ?</label>
-        <textarea id="message" name="message" placeholder="Allergies, mot doux, question..."></textarea>
+        <label for="message" data-i18n="lblMessage">Un message pour nous ?</label>
+        <textarea id="message" name="message" data-i18n-placeholder="phMessage" placeholder="Allergies, mot doux, question..."></textarea>
       </div>
 
-      <p class="rsvp-note">Ceci est une page de démonstration : les réponses ne sont pas encore transmises à une base de données réelle.</p>
-      <button type="submit" class="rsvp-submit">Envoyer ma réponse</button>
+      <p class="rsvp-note" data-i18n="rsvpNote">Ceci est une page de démonstration : les réponses ne sont pas encore transmises à une base de données réelle.</p>
+      <button type="submit" class="rsvp-submit" data-i18n="rsvpSubmit">Envoyer ma réponse</button>
     </form>
 
     <div class="rsvp-confirm" id="rsvpConfirm">
-      <h3>Merci !</h3>
+      <h3 data-i18n="rsvpThanks">Merci !</h3>
       <p id="rsvpConfirmText"></p>
     </div>
   </div>
 </section>
 
 <footer>
-  <span class="script">C &amp; A</span>
-  <p>Avec toute notre tendresse, à très bientôt.</p>
+  <span class="script script-name" style="font-size:34px;">C &amp; A</span>
+  <p data-i18n="footerText">Avec toute notre tendresse, à très bientôt.</p>
 </footer>
 
 <script>
+  const translations = {
+    fr: {
+      navProgramme:"Programme", navItineraire:"Itinéraire", navLogement:"Logement", navGalerie:"Galerie", navInfos:"Infos", navCagnotte:"Cagnotte",
+      heroEyebrow:"Nous nous marions", heroInvite:"sont heureux de vous faire part de leur mariage",
+      heroDate:"12 juin 2027", heroScroll:"↓ découvrir la journée",
+      progH2:"Le programme du jour", progP:"Une journée pensée pour profiter de chaque instant, entourés de ceux qu'on aime.",
+      icon1Title:"Verre de bienvenue", icon1Time:"14h00",
+      icon2Title:"Mariage civil<br>à la mairie", icon2Time:"15h00",
+      icon3Title:"Cocktail &amp; dîner<br>festif", icon3Time:"17h00",
+      t1Time:"15h00", t1Title:"Cérémonie", t1Desc:"Sous le grand chêne du domaine. Arrivée conseillée 20 minutes avant.",
+      t2Time:"16h00", t2Title:"Vin d'honneur", t2Desc:"Cocktail et petits fours dans les jardins.",
+      t3Time:"19h00", t3Title:"Dîner", t3Desc:"Sous la verrière, discours et menu de saison.",
+      t4Time:"22h00", t4Title:"Soirée dansante", t4Desc:"Ouverture de bal, puis piste ouverte jusqu'au bout de la nuit.",
+      itinH2:"S'y rendre &amp; se loger", itinP:"Toutes les informations pratiques pour organiser votre venue.",
+      itinBlockH3:"Itinéraire", itinP2:"À 45 min d'Avignon TGV, 1h20 de Marseille-Provence. Parking gratuit sur place.",
+      itinP3:"Une navette partira de la place du village à 14h15 pour les invités sans voiture.",
+      logeH3:"Où dormir",
+      place1:"10 min du domaine · quelques chambres réservées pour nos invités",
+      place2:"15 min du domaine · charme provençal, tarif de groupe",
+      place3:"20 min du domaine · option économique",
+      galH2:"Quelques souvenirs", galP:"Les photos viendront s'ajouter ici — un espace pour nous deux, un autre pour le lieu.",
+      galSubUs:"Nous deux", galItemUs:"photo de nous à venir",
+      galSubVenue:"Le lieu", galItemVenue:"photo du lieu à venir",
+      infosH2:"Infos pratiques", infosP:"Tout ce qu'il faut savoir avant le grand jour.",
+      tenueH3:"Tenue", tenueP:"Élégant champêtre. Prévoyez des chaussures confortables : la cérémonie et le vin d'honneur se déroulent sur l'herbe.",
+      enfantsH3:"Enfants", enfantsP:"Vos enfants sont les bienvenus. Un espace de jeux encadré sera prévu pendant le dîner.",
+      listeH3:"Liste de mariage", listeP:"Votre présence est le plus beau des cadeaux. Retrouvez notre cagnotte lune de miel juste en dessous.",
+      contactH3:"Contact", contactP:"Une question ? Écrivez-nous à camille-antoine@example.com ou contactez notre témoin, Julie, au 06 00 00 00 00.",
+      cagH2:"Notre cagnotte lune de miel", cagP:"Votre présence compte plus que tout. Si vous souhaitez tout de même nous offrir un geste, participez à notre lune de miel.",
+      cagCardH3:"Direction l'Italie", cagCardP:"Nous rêvons de partir quelques semaines en Italie après le mariage. Chaque petite participation nous rapprochera de ce voyage.",
+      cagBtn:"Participer à la cagnotte", cagNote:"Lien à venir — cette section sera activée prochainement.",
+      rsvpH2:"Confirmez votre présence", rsvpP:"Merci de répondre avant le 1er avril 2027.",
+      lblName:"Nom et prénom", lblEmail:"Email", lblAttending:"Serez-vous présent(e) ?",
+      optChoose:"Choisir une réponse", optYes:"Oui, avec joie", optNo:"Non, je ne pourrai pas",
+      lblGuests:"Nombre de personnes", lblMeal:"Préférence de menu",
+      optMealStd:"Menu standard", optMealVeg:"Végétarien", optMealVegan:"Vegan", optMealAllergy:"Allergie / autre (précisez en message)",
+      lblMessage:"Un message pour nous ?", phMessage:"Allergies, mot doux, question...",
+      rsvpNote:"Ceci est une page de démonstration : les réponses ne sont pas encore transmises à une base de données réelle.",
+      rsvpSubmit:"Envoyer ma réponse", rsvpThanks:"Merci !",
+      rsvpYes:"{name}, nous avons hâte de célébrer ce jour avec vous.",
+      rsvpNo:"{name}, merci de nous avoir prévenus, vous serez avec nous par la pensée.",
+      footerText:"Avec toute notre tendresse, à très bientôt."
+    },
+    en: {
+      navProgramme:"Program", navItineraire:"Directions", navLogement:"Lodging", navGalerie:"Gallery", navInfos:"Info", navCagnotte:"Gift fund",
+      heroEyebrow:"We're getting married", heroInvite:"are happy to announce their wedding",
+      heroDate:"June 12, 2027", heroScroll:"↓ discover the day",
+      progH2:"The day's schedule", progP:"A day designed to savor every moment, surrounded by those we love.",
+      icon1Title:"Welcome drink", icon1Time:"2:00 PM",
+      icon2Title:"Civil wedding<br>at the town hall", icon2Time:"3:00 PM",
+      icon3Title:"Cocktail &amp; festive dinner", icon3Time:"5:00 PM",
+      t1Time:"3:00 PM", t1Title:"Ceremony", t1Desc:"Under the estate's great oak tree. Please arrive 20 minutes early.",
+      t2Time:"4:00 PM", t2Title:"Reception drinks", t2Desc:"Cocktails and canapés in the gardens.",
+      t3Time:"7:00 PM", t3Title:"Dinner", t3Desc:"Under the glass pavilion, speeches and a seasonal menu.",
+      t4Time:"10:00 PM", t4Title:"Dancing", t4Desc:"First dance, then the floor is open all night long.",
+      itinH2:"Getting there &amp; staying", itinP:"Everything you need to plan your trip.",
+      itinBlockH3:"Directions", itinP2:"45 min from Avignon TGV station, 1h20 from Marseille-Provence airport. Free parking on site.",
+      itinP3:"A shuttle will leave the village square at 2:15 PM for guests without a car.",
+      logeH3:"Where to stay",
+      place1:"10 min from the venue · a few rooms held for our guests",
+      place2:"15 min from the venue · Provençal charm, group rate",
+      place3:"20 min from the venue · budget-friendly option",
+      galH2:"A few memories", galP:"Photos will be added here soon — one space for the two of us, another for the venue.",
+      galSubUs:"The two of us", galItemUs:"photo of us coming soon",
+      galSubVenue:"The venue", galItemVenue:"venue photo coming soon",
+      infosH2:"Practical info", infosP:"Everything you need to know before the big day.",
+      tenueH3:"Dress code", tenueP:"Rustic elegant. Bring comfortable shoes — the ceremony and reception drinks take place on the grass.",
+      enfantsH3:"Children", enfantsP:"Your children are welcome. A supervised play area will be available during dinner.",
+      listeH3:"Gift registry", listeP:"Your presence is the greatest gift. You'll find our honeymoon fund just below.",
+      contactH3:"Contact", contactP:"Questions? Email us at camille-antoine@example.com or contact our maid of honor, Julie, at 06 00 00 00 00.",
+      cagH2:"Our honeymoon fund", cagP:"Having you there means more than anything. If you'd still like to give us something, help send us on our honeymoon.",
+      cagCardH3:"Off to Italy", cagCardP:"We're dreaming of a few weeks in Italy after the wedding. Every little contribution brings us closer to that trip.",
+      cagBtn:"Contribute to our fund", cagNote:"Link coming soon — this section will be activated shortly.",
+      rsvpH2:"Confirm your attendance", rsvpP:"Please respond by April 1, 2027.",
+      lblName:"Full name", lblEmail:"Email", lblAttending:"Will you be attending?",
+      optChoose:"Choose an answer", optYes:"Yes, with joy", optNo:"No, I can't make it",
+      lblGuests:"Number of guests", lblMeal:"Meal preference",
+      optMealStd:"Standard menu", optMealVeg:"Vegetarian", optMealVegan:"Vegan", optMealAllergy:"Allergy / other (specify in message)",
+      lblMessage:"A message for us?", phMessage:"Allergies, sweet note, question...",
+      rsvpNote:"This is a demo page: responses aren't sent to a real database yet.",
+      rsvpSubmit:"Send my RSVP", rsvpThanks:"Thank you!",
+      rsvpYes:"{name}, we can't wait to celebrate this day with you.",
+      rsvpNo:"{name}, thank you for letting us know — you'll be with us in spirit.",
+      footerText:"With all our love, see you soon."
+    }
+  };
+
+  let currentLang = 'fr';
+
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      const val = translations[lang][key];
+      if(val !== undefined) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-placeholder');
+      const val = translations[lang][key];
+      if(val !== undefined) el.placeholder = val;
+    });
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+      b.classList.toggle('active', b.getAttribute('data-lang-btn') === lang);
+    });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.addEventListener('click', ()=> applyLang(b.getAttribute('data-lang-btn')));
+  });
+
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
@@ -576,9 +924,8 @@
     const attending = document.getElementById('attending').value;
     form.style.display = 'none';
     confirmBox.style.display = 'block';
-    confirmText.textContent = attending === 'oui'
-      ? `${name}, nous avons hâte de célébrer ce jour avec vous.`
-      : `${name}, merci de nous avoir prévenus, vous serez avec nous par la pensée.`;
+    const template = attending === 'oui' ? translations[currentLang].rsvpYes : translations[currentLang].rsvpNo;
+    confirmText.textContent = template.replace('{name}', name);
   });
 </script>
 
