@@ -187,6 +187,37 @@
     content:"";position:absolute;left:74px;top:6px;bottom:6px;
     width:1px;background:var(--line);
   }
+  .timeline-day {
+  position: relative;
+  padding: 28px 0 12px;
+  margin-top: 10px;
+  text-align: center;
+  }
+  
+  .timeline-day:first-child {
+    margin-top: 0;
+  }
+  
+  .timeline-day-date {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .timeline-day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--rose);
+    line-height: 1.1;
+  }
+  
+  .timeline-day:not(:first-child) {
+    margin-top: 28px;
+    padding-top: 34px;
+    border-top: 1px solid var(--line);
+  }
   .t-item{
     display:flex;gap:28px;padding:22px 0;
   }
@@ -430,6 +461,7 @@
 
 <!-- ---------- PROGRAMME ---------- -->
 <section id="programme" class="bloom-section">
+
   <svg class="corner-bloom tl" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M4 4 C 30 20, 46 36, 60 60" stroke="#D6407E" stroke-width="1" opacity="0.5"/>
     <path d="M20 10 C 30 22, 32 34, 26 42" stroke="#7C8560" stroke-width="1.1" opacity="0.7"/>
@@ -443,6 +475,7 @@
   <div class="wrap">
 
     <div class="section-head">
+
       <svg class="bouquet" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="20" cy="16" r="8" fill="#E8823D" opacity="0.55"/>
         <circle cx="12" cy="22" r="6" fill="#C43B4E" opacity="0.55"/>
@@ -454,242 +487,164 @@
         <circle cx="33" cy="16" r="2" fill="#5B8C87"/>
       </svg>
 
-      <h2 data-i18n="progH2">Le programme du week-end</h2>
+      <h2 data-i18n="progH2"></h2>
 
-      <p data-i18n="progP">
-        Deux jours pour profiter de chaque instant, entourés de ceux qu'on aime.
-      </p>
+      <p data-i18n="progP"></p>
+
     </div>
 
 
-    <!-- ---------- LES DEUX JOURS ---------- -->
-    <div class="programme-grid">
+    <!-- ---------- TIMELINE ---------- -->
+    <div class="timeline">
 
 
       <!-- ---------- SAMEDI 19 JUIN ---------- -->
-      <div class="programme-day">
 
-        <div class="day-header">
-          <span class="day-icon">💍</span>
-
-          <div>
-            <div class="day-date" data-i18n="saturdayDate">
-              SAMEDI 19 JUIN
-            </div>
-
-            <h3 data-i18n="saturdayTitle">
-              Le jour J
-            </h3>
-          </div>
-        </div>
-
-
-        <div class="day-timeline">
-
-          <!-- Cérémonie -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sat1Time">
-              15h00
-            </div>
-
-            <div class="programme-icon">
-              💒
-            </div>
-
-            <div class="programme-content">
-              <h4 data-i18n="sat1Title">
-                Cérémonie
-              </h4>
-
-              <p data-i18n="sat1Desc">
-                Sous le grand chêne du domaine. Arrivée conseillée 20 minutes avant.
-              </p>
-            </div>
-          </div>
-
-
-          <!-- Vin d'honneur -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sat2Time">
-              16h00
-            </div>
-
-            <div class="programme-icon">
-              🥂
-            </div>
-
-            <div class="programme-content">
-              <h4 data-i18n="sat2Title">
-                Vin d'honneur
-              </h4>
-
-              <p data-i18n="sat2Desc">
-                Cocktail et petits fours dans les jardins.
-              </p>
-            </div>
-          </div>
-
-
-          <!-- Dîner -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sat3Time">
-              19h00
-            </div>
-
-            <div class="programme-icon">
-              🍽️
-            </div>
-
-            <div class="programme-content">
-              <h4 data-i18n="sat3Title">
-                Dîner
-              </h4>
-
-              <p data-i18n="sat3Desc">
-                Sous la verrière, discours et menu de saison.
-              </p>
-            </div>
-          </div>
-
-
-          <!-- Soirée dansante -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sat4Time">
-              22h00
-            </div>
-
-            <div class="programme-icon">
-              🕺
-            </div>
-
-            <div class="programme-content">
-              <h4 data-i18n="sat4Title">
-                Soirée dansante
-              </h4>
-
-              <p data-i18n="sat4Desc">
-                Ouverture de bal, puis piste ouverte jusqu'au bout de la nuit.
-              </p>
-            </div>
-          </div>
-
-        </div>
+      <div class="timeline-day">
+        <div class="timeline-day-date" data-i18n="saturdayDate"></div>
+        <div class="timeline-day-title" data-i18n="saturdayTitle"></div>
       </div>
 
+
+      <!-- CÉRÉMONIE -->
+      <div class="t-item">
+
+        <div class="t-time" data-i18n="sat1Time"></div>
+
+        <div class="t-body">
+
+          <h3 data-i18n="sat1Title"></h3>
+
+          <p data-i18n="sat1Desc"></p>
+
+        </div>
+
+      </div>
+
+
+      <!-- VIN D'HONNEUR -->
+      <div class="t-item">
+
+        <div class="t-time" data-i18n="sat2Time"></div>
+
+        <div class="t-body">
+
+          <h3 data-i18n="sat2Title"></h3>
+
+          <p data-i18n="sat2Desc"></p>
+
+        </div>
+
+      </div>
+
+
+      <!-- DÎNER -->
+      <div class="t-item">
+
+        <div class="t-time" data-i18n="sat3Time"></div>
+
+        <div class="t-body">
+
+          <h3 data-i18n="sat3Title"></h3>
+
+          <p data-i18n="sat3Desc"></p>
+
+        </div>
+
+      </div>
+
+
+      <!-- SOIRÉE DANSANTE -->
+      <div class="t-item">
+
+        <div class="t-time" data-i18n="sat4Time"></div>
+
+        <div class="t-body">
+
+          <h3 data-i18n="sat4Title"></h3>
+
+          <p data-i18n="sat4Desc"></p>
+
+        </div>
+
+      </div>
 
 
       <!-- ---------- DIMANCHE 20 JUIN ---------- -->
-      <div class="programme-day">
 
-        <div class="day-header">
-          <span class="day-icon">☀️</span>
-
-          <div>
-            <div class="day-date" data-i18n="sundayDate">
-              DIMANCHE 20 JUIN
-            </div>
-
-            <h3 data-i18n="sundayTitle">
-              Le brunch
-            </h3>
-          </div>
-        </div>
+      <div class="timeline-day">
+        <div class="timeline-day-date" data-i18n="sundayDate"></div>
+        <div class="timeline-day-title" data-i18n="sundayTitle"></div>
+      </div>
 
 
-        <div class="day-timeline">
+      <!-- ACCUEIL & CAFÉ -->
+      <div class="t-item">
 
-          <!-- Accueil & café -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sun1Time">
-              11h00
-            </div>
+        <div class="t-time" data-i18n="sun1Time"></div>
 
-            <div class="programme-icon">
-              ☕
-            </div>
+        <div class="t-body">
 
-            <div class="programme-content">
-              <h4 data-i18n="sun1Title">
-                Accueil & café
-              </h4>
+          <h3 data-i18n="sun1Title"></h3>
 
-              <p data-i18n="sun1Desc">
-                On se retrouve tranquillement autour d'un café et de quelques douceurs.
-              </p>
-            </div>
-          </div>
-
-
-          <!-- Brunch -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sun2Time">
-              11h30
-            </div>
-
-            <div class="programme-icon">
-              🥐
-            </div>
-
-            <div class="programme-content">
-              <h4 data-i18n="sun2Title">
-                Brunch
-              </h4>
-
-              <p data-i18n="sun2Desc">
-                Un grand buffet convivial à partager tous ensemble.
-              </p>
-            </div>
-          </div>
-
-
-          <!-- Après-midi détente -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sun3Time">
-              13h00
-            </div>
-
-            <div class="programme-icon">
-              🌿
-            </div>
-
-            <div class="programme-content">
-              <h4 data-i18n="sun3Title">
-                Après-midi détente
-              </h4>
-
-              <p data-i18n="sun3Desc">
-                Profiter du domaine, discuter, se balader et prolonger les festivités.
-              </p>
-            </div>
-          </div>
-
-
-          <!-- Fin du week-end -->
-          <div class="programme-item">
-            <div class="programme-time" data-i18n="sun4Time">
-              15h00
-            </div>
-
-            <div class="programme-icon">
-              👋
-            </div>
-
-            <div class="programme-content">
-              <h4 data-i18n="sun4Title">
-                Fin du week-end
-              </h4>
-
-              <p data-i18n="sun4Desc">
-                Derniers cafés, derniers bisous et départ des invités.
-              </p>
-            </div>
-          </div>
+          <p data-i18n="sun1Desc"></p>
 
         </div>
+
+      </div>
+
+
+      <!-- BRUNCH -->
+      <div class="t-item">
+
+        <div class="t-time" data-i18n="sun2Time"></div>
+
+        <div class="t-body">
+
+          <h3 data-i18n="sun2Title"></h3>
+
+          <p data-i18n="sun2Desc"></p>
+
+        </div>
+
+      </div>
+
+
+      <!-- APRÈS-MIDI DÉTENTE -->
+      <div class="t-item">
+
+        <div class="t-time" data-i18n="sun3Time"></div>
+
+        <div class="t-body">
+
+          <h3 data-i18n="sun3Title"></h3>
+
+          <p data-i18n="sun3Desc"></p>
+
+        </div>
+
+      </div>
+
+
+      <!-- FIN DU WEEK-END -->
+      <div class="t-item">
+
+        <div class="t-time" data-i18n="sun4Time"></div>
+
+        <div class="t-body">
+
+          <h3 data-i18n="sun4Title"></h3>
+
+          <p data-i18n="sun4Desc"></p>
+
+        </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 <!-- ---------- ITINERAIRE & LOGEMENT ---------- -->
 <section id="itineraire" class="bloom-section" style="background:var(--ivory-deep);">
