@@ -347,6 +347,34 @@
     html{scroll-behavior:auto;}
   }
 
+  /* ---------- PHOTO FINALE ---------- */
+  .final-photo-section {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+  
+  .final-photo {
+    width: 60%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  
+  .final-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  @media (max-width: 680px) {
+    .final-photo {
+      width: 90%;
+    }
+  }
+
   /* ---------- PAGE FRAME ---------- */
   .page-frame{
     position:fixed;inset:12px;
@@ -771,15 +799,16 @@
       <h3 data-i18n="rsvpThanks"></h3>
       <p id="rsvpConfirmText"></p>
     </div>
+</section>
+  
+<!-- ---------- PHOTO FINALE ---------- -->
+<section class="final-photo-section">
+  <div class="final-photo">
+    <img src="images/nous-2.jpg" alt="Karla et Fabien">
   </div>
-  </div>
-  <div class="gallery">
-
-      <div class="photo">
-        <img src="images/nous-2.jpg" alt="Karla et Fabien">
-      </div>
 </section>
 
+<!-- ---------- FOOTER ---------- -->
 <footer>
   <span class="script script-name" style="font-size:34px;">K &amp; F</span>
   <p data-i18n="footerText"></p>
