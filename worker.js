@@ -1,4 +1,4 @@
-const COOKIE_NAME = "__Host-mariage_session";
+const COOKIE_NAME = "mariage_session";
 const SESSION_TTL = 60 * 60 * 24 * 30; // 30 jours
 
 export default {
@@ -11,7 +11,8 @@ export default {
         status: 303,
         headers: {
           Location: "/",
-          "Set-Cookie": `${COOKIE_NAME}=; Max-Age=0; Path=/; Secure; HttpOnly; SameSite=Lax`,
+          "Set-Cookie":
+            `${COOKIE_NAME}=; Max-Age=0; Path=/; Secure; HttpOnly; SameSite=None`,
         },
       });
     }
@@ -21,10 +22,12 @@ export default {
       const form = await request.formData();
       const password = String(form.get("password") || "");
 
+      // Vérification du mot de passe
       if (password !== env.SITE_PASSWORD) {
         return loginPage("Mot de passe incorrect.", 401);
       }
 
+      // Création d'une session
       const session = await createSession(env.SESSION_SECRET);
 
       return new Response(null, {
@@ -33,7 +36,8 @@ export default {
           Location: "/",
           "Set-Cookie":
             `${COOKIE_NAME}=${session}; Max-Age=${SESSION_TTL}; ` +
-            `Path=/; Secure; HttpOnly; SameSite=Lax`,
+            `Path=/; Secure; HttpOnly; SameSite=None`,
+          "Cache-Control": "no-store",
         },
       });
     }
@@ -44,17 +48,25 @@ export default {
       env.SESSION_SECRET
     );
 
+    // Pas connecté → afficher la page de connexion
     if (!authenticated) {
       return loginPage();
     }
 
-    // Session valide : on laisse Cloudflare servir index.html
+    // Session valide → Cloudflare sert le site
     return env.ASSETS.fetch(request);
   },
 };
 
+
+// ============================================================
+// CRÉATION DE LA SESSION
+// ============================================================
+
 async function createSession(secret) {
-  const expires = Math.floor(Date.now() / 1000) + SESSION_TTL;
+  const expires =
+    Math.floor(Date.now() / 1000) + SESSION_TTL;
+
   const nonce = crypto.randomUUID();
 
   const payload = `${expires}.${nonce}`;
@@ -63,55 +75,91 @@ async function createSession(secret) {
   return `${base64url(payload)}.${signature}`;
 }
 
+
+// ============================================================
+// VÉRIFICATION DE LA SESSION
+// ============================================================
+
 async function verifySession(request, secret) {
-  const cookieHeader = request.headers.get("Cookie") || "";
+  const cookieHeader =
+    request.headers.get("Cookie") || "";
 
   const match = cookieHeader.match(
     new RegExp(`${COOKIE_NAME}=([^;]+)`)
   );
 
-  if (!match) return false;
+  if (!match) {
+    return false;
+  }
 
   try {
-    const [encodedPayload, signature] = match[1].split(".");
+    const [encodedPayload, signature] =
+      match[1].split(".");
 
-    if (!encodedPayload || !signature) return false;
-
-    const payload = base64urlDecode(encodedPayload);
-    const [expires] = payload.split(".");
-
-    if (!expires || Number(expires) < Math.floor(Date.now() / 1000)) {
+    if (!encodedPayload || !signature) {
       return false;
     }
 
-    const expectedSignature = await sign(payload, secret);
+    const payload =
+      base64urlDecode(encodedPayload);
+
+    const [expires] =
+      payload.split(".");
+
+    // Session expirée
+    if (
+      !expires ||
+      Number(expires) <
+        Math.floor(Date.now() / 1000)
+    ) {
+      return false;
+    }
+
+    // Vérification de la signature
+    const expectedSignature =
+      await sign(payload, secret);
 
     return signature === expectedSignature;
+
   } catch {
     return false;
   }
 }
 
+
+// ============================================================
+// SIGNATURE HMAC
+// ============================================================
+
 async function sign(value, secret) {
-  const key = await crypto.subtle.importKey(
-    "raw",
-    new TextEncoder().encode(secret),
-    {
-      name: "HMAC",
-      hash: "SHA-256",
-    },
-    false,
-    ["sign"]
-  );
+  const key =
+    await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(secret),
+      {
+        name: "HMAC",
+        hash: "SHA-256",
+      },
+      false,
+      ["sign"]
+    );
 
-  const signature = await crypto.subtle.sign(
-    "HMAC",
-    key,
-    new TextEncoder().encode(value)
-  );
+  const signature =
+    await crypto.subtle.sign(
+      "HMAC",
+      key,
+      new TextEncoder().encode(value)
+    );
 
-  return base64url(new Uint8Array(signature));
+  return base64url(
+    new Uint8Array(signature)
+  );
 }
+
+
+// ============================================================
+// BASE64 URL SAFE
+// ============================================================
 
 function base64url(value) {
   const bytes =
@@ -120,6 +168,7 @@ function base64url(value) {
       : value;
 
   let binary = "";
+
   for (const byte of bytes) {
     binary += String.fromCharCode(byte);
   }
@@ -130,76 +179,178 @@ function base64url(value) {
     .replace(/=+$/, "");
 }
 
+
+// ============================================================
+// DÉCODAGE BASE64 URL SAFE
+// ============================================================
+
 function base64urlDecode(value) {
   const padded =
-    value.replace(/-/g, "+").replace(/_/g, "/") +
-    "===".slice((value.length + 3) % 4);
+    value
+      .replace(/-/g, "+")
+      .replace(/_/g, "/") +
+    "===".slice(
+      (value.length + 3) % 4
+    );
 
   const binary = atob(padded);
-  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
 
-  return new TextDecoder().decode(bytes);
+  const bytes =
+    Uint8Array.from(
+      binary,
+      c => c.charCodeAt(0)
+    );
+
+  return new TextDecoder()
+    .decode(bytes);
 }
 
-function loginPage(error = "", status = 200) {
+
+// ============================================================
+// PAGE DE CONNEXION
+// ============================================================
+
+function loginPage(
+  error = "",
+  status = 200
+) {
   return new Response(
     `<!doctype html>
+
 <html lang="fr">
+
 <head>
+
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
   <title>Accès privé</title>
+
   <style>
-    * { box-sizing: border-box; }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
+
       display: grid;
       place-items: center;
+
       background: #f7f3ee;
-      font-family: system-ui, sans-serif;
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       color: #333;
     }
+
     .box {
       width: min(90%, 420px);
+
       padding: 40px;
+
       background: white;
+
       border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.08);
+
+      box-shadow:
+        0 10px 40px
+        rgba(0, 0, 0, .08);
+
       text-align: center;
     }
-    h1 { margin-top: 0; }
-    p { color: #666; }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    p {
+      color: #666;
+    }
+
     input {
       width: 100%;
+
       padding: 14px;
-      margin: 20px 0 12px;
-      border: 1px solid #ddd;
+
+      margin:
+        20px 0 12px;
+
+      border:
+        1px solid #ddd;
+
       border-radius: 10px;
+
       font-size: 16px;
     }
+
     button {
       width: 100%;
+
       padding: 14px;
+
       border: 0;
+
       border-radius: 10px;
+
       background: #333;
+
       color: white;
+
       font-size: 16px;
+
       cursor: pointer;
     }
+
+    button:active {
+      transform: scale(.99);
+    }
+
     .error {
       color: #b42318;
+
       margin-bottom: 15px;
     }
+
   </style>
+
 </head>
+
 <body>
+
   <main class="box">
+
     <h1>Site privé</h1>
-    <p>Entrez le mot de passe pour accéder au site.</p>
-    ${error ? `<div class="error">${escapeHtml(error)}</div>` : ""}
-    <form method="POST" action="/__auth/login">
+
+    <p>
+      Entrez le mot de passe
+      pour accéder au site.
+    </p>
+
+    ${
+      error
+        ? `<div class="error">
+             ${escapeHtml(error)}
+           </div>`
+        : ""
+    }
+
+    <form
+      method="POST"
+      action="/__auth/login"
+    >
+
       <input
         type="password"
         name="password"
@@ -208,27 +359,47 @@ function loginPage(error = "", status = 200) {
         required
         autofocus
       >
-      <button type="submit">Entrer</button>
+
+      <button type="submit">
+        Entrer
+      </button>
+
     </form>
+
   </main>
+
 </body>
+
 </html>`,
+
     {
       status,
+
       headers: {
-        "Content-Type": "text/html; charset=UTF-8",
-        "Cache-Control": "no-store",
+        "Content-Type":
+          "text/html; charset=UTF-8",
+
+        "Cache-Control":
+          "no-store",
       },
     }
   );
 }
 
+
+// ============================================================
+// PROTECTION HTML
+// ============================================================
+
 function escapeHtml(value) {
-  return value.replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;",
-  }[char]));
+  return value.replace(
+    /[&<>"']/g,
+    char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    }[char])
+  );
 }
